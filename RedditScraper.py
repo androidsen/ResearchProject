@@ -4,16 +4,14 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import datetime as dt
 import pandas as pd
 
-reddit = praw.Reddit(client_id='nl40p2Rnogq6NA',
-                     client_secret='--Lo0cBiCjzKWAQI28UW2YhN6hY',
-                     user_agent='Reddit_Exploration')
+reddit = praw.Reddit(client_id='XXXX',
+                     client_secret='XXXX',
+                     user_agent='XXXX')
 
 api = PushshiftAPI(reddit)
 
-# gen = api.search_submissions(limit=100)
-
-start_epoch = int(dt.datetime(2018, 2, 1).timestamp())
-end_epoch = int(dt.datetime(2018, 2, 2).timestamp())  # 17 mins for one month
+start_epoch = int(dt.datetime(2010, 1, 1).timestamp())
+end_epoch = int(dt.datetime(2010, 1, 31).timestamp())
 
 submission_results = list(api.search_submissions(after=start_epoch,
                                                  before=end_epoch,
@@ -58,4 +56,4 @@ analyzer = SentimentIntensityAnalyzer()
 sentiment = df['title'].apply(lambda x: analyzer.polarity_scores(x))
 df = pd.concat([df, sentiment.apply(pd.Series)], 1)
 
-df.to_csv('newtest1.csv', encoding='utf-8', index=False)
+df.to_csv('FILENAME.csv', encoding='utf-8', index=False)
